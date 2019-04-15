@@ -1,5 +1,3 @@
-import com.sun.istack.internal.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,8 +43,8 @@ public class system extends T0status {
         }
     }
 
-    private int name2index(@NotNull String s) {
-        String str = s.substring(s.length() - 1, s.length());
+    private int name2index(String s) {
+        String str = s.substring(s.length() - 1);
         return Integer.valueOf(str);
     }
 
