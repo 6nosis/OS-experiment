@@ -12,11 +12,11 @@ public class system extends T0status {
     private int currready;
     private List<PCB> process;
 
-    system(String T0){
+    system(String T0) {
         this.source = super.source;
         this.allocation = super.allocation;
         this.need = super.need;
-        this.available =super.available;
+        this.available = super.available;
         this.process = super.process;
     }
 
@@ -36,7 +36,7 @@ public class system extends T0status {
             for (int j = 0; j < 3; j++)
                 System.out.print(need[i][j] + "   ");
             System.out.print("  ");
-            if(f == 0){
+            if (f == 0) {
                 for (int j = 0; j < 3; j++)
                     System.out.print(available[j] + "   ");
                 f++;
@@ -45,17 +45,17 @@ public class system extends T0status {
         }
     }
 
-    private int name2index(@NotNull String s){
-        String str = s.substring(s.length()-1,s.length());
+    private int name2index(@NotNull String s) {
+        String str = s.substring(s.length() - 1, s.length());
         return Integer.valueOf(str);
     }
 
-    public void opwPCB(String name,char c){//更改状态，哪个进程，状态改为什么
+    public void opwPCB(String name, char c) {//更改状态，哪个进程，状态改为什么
         this.process.get(name2index(name)).setStatus(c);
     }
 
-    public void opwPCB(int n,String s,int[] a){
-        switch (n){
+    public void opwPCB(int n, String s, int[] a) {
+        switch (n) {
             case 1:
                 this.process.get(name2index(s)).setApply(a);
                 break;
@@ -68,45 +68,45 @@ public class system extends T0status {
         }
     }
 
-    public boolean check(int[] a){
-        if(a.length!=this.available.length)return false;
-        for(int i = 0;i<this.available.length;i++){
-            if(a[i]>this.available[i])return false;
+    public boolean check(int[] a) {
+        if (a.length != this.available.length) return false;
+        for (int i = 0; i < this.available.length; i++) {
+            if (a[i] > this.available[i]) return false;
         }
         return true;
     }
 
-    private boolean can(PCB p){
-        for(int i = 0;i<this.work.length;i++){
-            if(p.getApply()[i]>this.work[i]){
+    private boolean can(PCB p) {
+        for (int i = 0; i < this.work.length; i++) {
+            if (p.getApply()[i] > this.work[i]) {
                 return false;
             }
         }
         return true;
     }
 
-    private boolean checkSecurity(){
+    private boolean checkSecurity() {
         List<PCB> tmp = new ArrayList<>();
         this.work = this.available;//初始化工作向量
-        for(int i = 0;i<this.process.size();i++){
-            if(this.process.get(i).getStatus() == 'r'){
+        for (int i = 0; i < this.process.size(); i++) {
+            if (this.process.get(i).getStatus() == 'r') {
                 tmp.add(this.process.get(i));//找到要申请资源的进程将其加入列表
             }
         }
         boolean[] finish = new boolean[tmp.size()];
-        for(int i = 0;i<tmp.size();i++){
-            finish[i]=false;
+        for (int i = 0; i < tmp.size(); i++) {
+            finish[i] = false;
         }
-        for(int i = 0;i<tmp.size();i++){
-            if(finish[i]==false && can(tmp.get(i))){//对于可加入安全序列的进程
-                for(int j = 0;j<work.length;j++){
+        for (int i = 0; i < tmp.size(); i++) {
+            if (finish[i] == false && can(tmp.get(i))) {//对于可加入安全序列的进程
+                for (int j = 0; j < work.length; j++) {
                     this.work[j] += tmp.get(i).getApply()[j];//假设它很快完成任务，把资源归还
                 }
                 finish[i] = true;//让它可完成
             }
         }
-        for(int i = 0;i<finish.length;i++){
-            if(finish[i]==false){//只要有不能完成的，即不满足安全序列
+        for (int i = 0; i < finish.length; i++) {
+            if (finish[i] == false) {//只要有不能完成的，即不满足安全序列
                 return false;
             }
         }
@@ -114,67 +114,67 @@ public class system extends T0status {
         return true;
     }
 
-    private void apply(){
-        for(int i = 0;i<this.available.length;i++){
+    private void apply() {
+        for (int i = 0; i < this.available.length; i++) {
             this.available[i] -= this.process.get(this.currready).getApply()[i];//系统现存减申请
             this.allocation[currready][i] += this.process.get(this.currready).getApply()[i];//系统占用加申请
         }
         this.orderApply();//将申请清零
     }
 
-    private void giveback(){
+    private void giveback() {
         //将进程占据资源全部归还
-        for(int i = 0;i<this.process.get(this.currready).getOccupy().length;i++){
+        for (int i = 0; i < this.process.get(this.currready).getOccupy().length; i++) {
             this.available[i] += this.process.get(this.currready).getOccupy()[i];
         }
         //将该进程系统占用清零
-        for(int i = 0;i<this.process.get(this.currready).getOccupy().length;i++){
+        for (int i = 0; i < this.process.get(this.currready).getOccupy().length; i++) {
             this.allocation[this.currready][i] = 0;
         }
         this.process.get(this.currready).release();//更新占据资源信息
         this.process.get(this.currready).setStatus('e');//更改状态为“完成”
     }
 
-    public boolean BankerAlgorithm(){
-        while (this.checkReady()){//检查就绪进程
-            if(this.check(this.process.get(this.currready).getApply()) && checkSecurity()){//现存可满足申请并进行安全性检查
+    public boolean BankerAlgorithm() {
+        while (this.checkReady()) {//检查就绪进程
+            if (this.check(this.process.get(this.currready).getApply()) && checkSecurity()) {//现存可满足申请并进行安全性检查
                 this.apply();
-                if(!this.checkFulfil() && (process.get(currready).getApply()[0]!=0&&process.get(currready).getApply()[1]!=0&&process.get(currready).getApply()[2]!=0)){//没有得到全部所需资源
+                if (!this.checkFulfil() && (process.get(currready).getApply()[0] != 0 && process.get(currready).getApply()[1] != 0 && process.get(currready).getApply()[2] != 0)) {//没有得到全部所需资源
                     continue;
-                }else {//得到全部所需资源
+                } else {//得到全部所需资源
                     this.giveback();
                 }
-                for(int i = 0;i<this.process.size();i++){
-                    if(this.process.get(i).getStatus() == 'w'){//检查等待中的进程
-                        if(check(this.need[i])){//如果系统现存能满足之前的申请
+                for (int i = 0; i < this.process.size(); i++) {
+                    if (this.process.get(i).getStatus() == 'w') {//检查等待中的进程
+                        if (check(this.need[i])) {//如果系统现存能满足之前的申请
                             this.process.get(i).setStatus('r');//设置为“就绪”状态
                         }
                     }
                 }
-            }else{
+            } else {
                 this.process.get(this.currready).setStatus('w');//不能满足申请置为“等待”状态
                 this.need[this.currready] = this.process.get(this.currready).getApply();//向系统登记申请
                 continue;
             }
         }
-        for(int i = 0;i<this.process.size();i++){//检查是否有进程未处于完成态
-            if(this.process.get(i).getStatus() != 'e')return false;
+        for (int i = 0; i < this.process.size(); i++) {//检查是否有进程未处于完成态
+            if (this.process.get(i).getStatus() != 'e') return false;
         }
         //执行到这说明全部完成
         return true;
     }
 
-    private void orderApply(){//允许申请
+    private void orderApply() {//允许申请
         int[] a = new int[this.process.get(this.currready).getApply().length];
-        for(int i = 0;i<this.process.get(this.currready).getApply().length;i++){
+        for (int i = 0; i < this.process.get(this.currready).getApply().length; i++) {
             a[i] = 0;//将进程申请全部清零
         }
         this.process.get(this.currready).setApply(a);//完成清零
     }
 
-    private boolean checkReady(){//检查当前进程列表中是否有状态为“就绪”的进程
-        for(int i = 0; i < this.process.size(); i++){
-            if(this.process.get(i).getStatus()=='r'){
+    private boolean checkReady() {//检查当前进程列表中是否有状态为“就绪”的进程
+        for (int i = 0; i < this.process.size(); i++) {
+            if (this.process.get(i).getStatus() == 'r') {
                 this.currready = i;//如果有就把它的序号交给currready
                 return true;
             }
@@ -182,40 +182,40 @@ public class system extends T0status {
         return false;
     }
 
-    private boolean checkFulfil(){//检查是否满足全部需求
+    private boolean checkFulfil() {//检查是否满足全部需求
         boolean result = true;
-        for(int i = 0;i<process.get(currready).getNeedmax().length;i++){
-            if(process.get(currready).getNeedmax()[i] != process.get(currready).getOccupy()[i]){
+        for (int i = 0; i < process.get(currready).getNeedmax().length; i++) {
+            if (process.get(currready).getNeedmax()[i] != process.get(currready).getOccupy()[i]) {
                 result = false;
             }
         }
         return result;
     }
 
-    public boolean RandomAlgorithm(){
-        while (this.checkReady()){//检查就绪进程
-            if(this.check(this.process.get(this.currready).getApply())){//现存可满足申请
+    public boolean RandomAlgorithm() {
+        while (this.checkReady()) {//检查就绪进程
+            if (this.check(this.process.get(this.currready).getApply())) {//现存可满足申请
                 this.apply();
-                if(!this.checkFulfil() && (process.get(currready).getApply()[0]!=0&&process.get(currready).getApply()[1]!=0&&process.get(currready).getApply()[2]!=0)){//没有得到全部所需资源
+                if (!this.checkFulfil() && (process.get(currready).getApply()[0] != 0 && process.get(currready).getApply()[1] != 0 && process.get(currready).getApply()[2] != 0)) {//没有得到全部所需资源
                     continue;
-                }else {//得到全部所需资源
-                   this.giveback();
+                } else {//得到全部所需资源
+                    this.giveback();
                 }
-                for(int i = 0;i<this.process.size();i++){//检查等待中的进程
-                    if(this.process.get(i).getStatus() == 'w'){
-                        if(check(this.need[i])){//如果系统现存能满足之前的申请
+                for (int i = 0; i < this.process.size(); i++) {//检查等待中的进程
+                    if (this.process.get(i).getStatus() == 'w') {
+                        if (check(this.need[i])) {//如果系统现存能满足之前的申请
                             this.process.get(i).setStatus('r');//设置为“就绪”状态
                         }
                     }
                 }
-            }else{
+            } else {
                 this.process.get(this.currready).setStatus('w');//不能满足申请置为“等待”状态
                 this.need[this.currready] = this.process.get(this.currready).getApply();//向系统登记申请
                 continue;
             }
         }
-        for(int i = 0;i<this.process.size();i++){//检查是否有进程未处于完成态
-            if(this.process.get(i).getStatus() != 'e')return false;
+        for (int i = 0; i < this.process.size(); i++) {//检查是否有进程未处于完成态
+            if (this.process.get(i).getStatus() != 'e') return false;
         }
         //执行到这说明全部完成
         return true;
