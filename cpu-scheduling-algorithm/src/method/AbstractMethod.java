@@ -4,23 +4,23 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public abstract class method {//展示当前容器中的进程信息，响应输入
-
+/**
+ * 展示当前容器中的进程信息，响应输入
+ * @author kaoso
+ */
+public abstract class AbstractMethod {
+    /**
+     * 输出说明文字
+     */
     public abstract void show();
 
-    public void goon() {
+    protected void goon() {
         System.out.println("请按回车键继续执行...");
+        // 读取回车键
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
             String str = in.readLine();
-            switch (str) {
-                default:
-                    return;
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("异常退出");
-            System.exit(0);
-        } catch (IOException ie) {
+        } catch (NumberFormatException | IOException e) {
             System.out.println("异常退出");
             System.exit(0);
         }

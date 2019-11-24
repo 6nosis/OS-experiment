@@ -1,46 +1,49 @@
-public class PCB {
+/**
+ * @author kaoso
+ */
+public class Pcb {
     private String name;
     private char status;
     private int[] apply = {0, 0, 0};
-    private int[] needmax;
+    private int[] needMax;
     private int[] occupy;
 
-    PCB(String name, char s, int[] n, int[] o) {
+    Pcb(String name, char s, int[] n, int[] o) {
         this.name = name;
         this.status = s;
-        this.needmax = n;
+        this.needMax = n;
         this.occupy = o;
     }
 
-    public char getStatus() {
+    char getStatus() {
         return status;
     }
 
-    public void setStatus(char status) {
+    void setStatus(char status) {
         this.status = status;
     }
 
-    public int[] getApply() {
+    int[] getApply() {
         return apply;
     }
 
-    public void setApply(int[] apply) {
+    void setApply(int[] apply) {
         this.apply = apply;
     }
 
-    public int[] getNeedmax() {
-        return needmax;
+    int[] getNeedMax() {
+        return needMax;
     }
 
-    public void setNeedmax(int[] needmax) {
-        this.needmax = needmax;
+    void setNeedMax(int[] needMax) {
+        this.needMax = needMax;
     }
 
-    public int[] getOccupy() {
+    int[] getOccupy() {
         return occupy;
     }
 
-    public void setOccupy(int[] occupy) {
+    void setOccupy(int[] occupy) {
         this.occupy = occupy;
     }
 
@@ -50,7 +53,7 @@ public class PCB {
         }
     }
 
-    public void release() {
+    void release() {
         for (int i = 0; i < occupy.length; i++) {
             occupy[i] = 0;
         }

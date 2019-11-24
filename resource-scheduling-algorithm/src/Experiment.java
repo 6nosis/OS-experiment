@@ -3,8 +3,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
+/**
+ * @author kaoso
+ */
 public class Experiment {
-    private system sys = new system("example");
+    private SystemLevel sys = new SystemLevel("example");
     private int algorithm;
 
     public static void main(String[] args) {
@@ -20,16 +23,16 @@ public class Experiment {
         System.out.println("实验结束");
     }
 
-    public void choice() {
+    private void choice() {
         sys.show();
         System.out.println("是否采用银行家算法？【yes/no】:");
         Scanner in = new Scanner(System.in);
         while (true) {
             String choose = in.nextLine();
-            if (choose.equals("y") || choose.equals("yes")) {
+            if ("y".equals(choose) || "yes".equals(choose)) {
                 this.algorithm = 1;
                 return;
-            } else if (choose.equals("n") || choose.equals("no")) {
+            } else if ("n".equals(choose) || "no".equals(choose)) {
                 this.algorithm = 0;
                 return;
             } else {
@@ -38,8 +41,9 @@ public class Experiment {
         }
     }
 
-    public void apply() {
-        try {//安全读取输入
+    private void apply() {
+        // 安全读取输入
+        try {
             while (true) {
                 System.out.println("请输入有多少个进程要申请资源（最高为5，输入其他字符退出）：");
                 BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -50,48 +54,49 @@ public class Experiment {
                     case "3":
                     case "4":
                     case "5":
-                        if (inputrequest(Integer.parseInt(str))) return;
-                        else continue;
+                        if (inputRequest(Integer.parseInt(str))) {
+                            return;
+                        } else {
+                            continue;
+                        }
                     default:
                         System.out.println("退出");
                         System.exit(0);
                 }
             }
-        } catch (NumberFormatException e) {
-            System.out.println("异常退出");
-            System.exit(0);
-        } catch (IOException ie) {
+        } catch (NumberFormatException | IOException e) {
             System.out.println("异常退出");
             System.exit(0);
         }
     }
 
-    public boolean inputrequest(int n) {
+    private boolean inputRequest(int n) {
         System.out.println("当前有" + n + "个进程要申请资源");
         int[] curr = new int[n];
-        int[][] asource = new int[n][3];
+        int[][] aSource = new int[n][3];
         for (int i = 0; i < n; i++) {
             System.out.println("请指定第" + (i + 1) + "个要申请资源的进程名：（输入0-4）");
             Scanner in = new Scanner(System.in);
             curr[i] = in.nextInt();
             System.out.println("请依次输入进程" + (curr[i]) + "要申请的各类资源数量：");
             System.out.println("A类资源：");
-            asource[i][0] = in.nextInt();
+            aSource[i][0] = in.nextInt();
             System.out.println("B类资源：");
-            asource[i][1] = in.nextInt();
+            aSource[i][1] = in.nextInt();
             System.out.println("C类资源：");
-            asource[i][2] = in.nextInt();
+            aSource[i][2] = in.nextInt();
         }
-        int count[] = new int[3];//统计对三类资源的总申请量
+        // 统计对三类资源的总申请量
+        int[] count = new int[3];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < n; j++) {
-                count[i] = asource[j][i];
+                count[i] = aSource[j][i];
             }
         }
         if (sys.check(count)) {
             for (int i = 0; i < curr.length; i++) {
-                sys.opwPCB(1, "P" + String.valueOf(curr[i]), asource[i]);
-                sys.opwPCB("P" + String.valueOf(curr[i]), 'r');
+                sys.opwPcb(1, "P" + String.valueOf(curr[i]), aSource[i]);
+                sys.opwPcb("P" + String.valueOf(curr[i]), 'r');
             }
             return true;
         } else {
@@ -100,17 +105,17 @@ public class Experiment {
         }
     }
 
-    public void exec() {
+    private void exec() {
         if (this.algorithm == 1) {
             System.out.println("正在使用银行家算法...");
-            if (sys.BankerAlgorithm()) {
+            if (sys.bankerAlgorithm()) {
                 System.out.println("成功执行银行家算法，未发生死锁");
             } else {
                 System.out.println("未检测到安全序列，不能申请");
             }
         } else {
             System.out.println("正在使用随机分配算法...");
-            if (sys.RandomAlgorithm()) {
+            if (sys.randomAlgorithm()) {
                 System.out.println("随机分配算法没有产生死锁");
             } else {
                 System.out.println("随机分配算法产生死锁");

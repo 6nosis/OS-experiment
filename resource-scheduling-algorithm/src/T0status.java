@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class T0status {
+class T0status {
     protected int[] source;
     protected int[][] max;
     protected int[][] allocation;
     protected int[][] need;
     protected int[] available;
-    protected List<PCB> process = new ArrayList<PCB>();
+    protected List<Pcb> process = new ArrayList<Pcb>();
 
     T0status() {
         this.source = new int[]{10, 5, 7};
@@ -40,7 +40,7 @@ public class T0status {
         //     }
         // }
         for (int i = 0; i < 5; i++) {
-            process.add(new PCB("P" + String.valueOf(i), 'w', max[i], allocation[i]));
+            process.add(new Pcb("P" + String.valueOf(i), 'w', max[i], allocation[i]));
         }
     }
 
