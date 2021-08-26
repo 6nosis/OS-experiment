@@ -1,12 +1,12 @@
-/*
+package schedule.cpu;/*
  * @author Kaoso
  * @since 2018.06.01
  */
 
-import pcb.Pcb;
-import pcb.PriorityPcb;
-import priority.Priority;
-import simpleroundrobin.SimpleRoundRobin;
+import schedule.cpu.pcb.PriorityPcb;
+import schedule.cpu.priority.Priority;
+import schedule.cpu.simpleroundrobin.SimpleRoundRobin;
+import schedule.cpu.pcb.Pcb;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -43,7 +43,7 @@ public class Experiment {
         System.out.println("实验结束");
     }
 
-    private void choice() {
+    public void choice() {
         /*
          * 选择算法
          */

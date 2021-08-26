@@ -1,4 +1,4 @@
-package method;
+package schedule.cpu.method;
 
 import java.io.BufferedReader;
 import java.io.IOException;

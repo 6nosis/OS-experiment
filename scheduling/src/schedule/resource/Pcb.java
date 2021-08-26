@@ -1,3 +1,5 @@
+package schedule.resource;
+
 /**
  * @author kaoso
  */
@@ -8,7 +10,7 @@ public class Pcb {
     private int[] needMax;
     private int[] occupy;
 
-    Pcb(String name, char s, int[] n, int[] o) {
+    public Pcb(String name, char s, int[] n, int[] o) {
         this.name = name;
         this.status = s;
         this.needMax = n;
@@ -19,7 +21,7 @@ public class Pcb {
         return status;
     }
 
-    void setStatus(char status) {
+    public void setStatus(char status) {
         this.status = status;
     }
 

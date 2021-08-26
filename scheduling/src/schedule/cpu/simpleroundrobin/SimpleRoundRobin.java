@@ -1,7 +1,7 @@
-package simpleroundrobin;
+package schedule.cpu.simpleroundrobin;
 
-import pcb.Pcb;
-import method.AbstractMethod;
+import schedule.cpu.method.AbstractMethod;
+import schedule.cpu.pcb.Pcb;
 
 import java.util.ArrayList;
 import java.util.List;

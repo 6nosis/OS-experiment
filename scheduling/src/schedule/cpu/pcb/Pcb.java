@@ -1,4 +1,4 @@
-package pcb;
+package schedule.cpu.pcb;
 
 import java.util.Scanner;
 
@@ -38,7 +38,7 @@ public class Pcb {
      * 获取进程名
      * @return 进程名
      */
-    private String getName() {
+    public String getName() {
         return this.name;
     }
 
@@ -62,7 +62,7 @@ public class Pcb {
      * 获取状态
      * @return 状态
      */
-    private char getStatus() {
+    public char getStatus() {
         return this.status;
     }
 

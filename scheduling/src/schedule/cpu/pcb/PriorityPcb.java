@@ -1,4 +1,4 @@
-package pcb;
+package schedule.cpu.pcb;
 
 import java.util.Scanner;
 

@@ -1,7 +1,8 @@
-package priority;
+package schedule.cpu.priority;
 
-import pcb.PriorityPcb;
-import method.AbstractMethod;
+import schedule.cpu.method.AbstractMethod;
+import schedule.cpu.pcb.PriorityPcb;
+
 import java.util.*;
 
 /**
