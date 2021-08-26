@@ -1,9 +1,9 @@
-# OS-experiment
+# java-os-experiment
 
-// It’s too shabby now.
+编程新手玩具
 
-## Completed(OOP)
-(Mentality: Programming beginner)
-1. Highest priority algorithm.
-2. Simple time slice rotation algorithm.
-3. Banker algorithm.
+## 已实现
+
+1. 最高优先级调度算法
+2. 简单时间片轮转算法
+3. 银行家算法
