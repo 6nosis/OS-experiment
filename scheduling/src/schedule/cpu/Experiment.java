@@ -1,7 +1,4 @@
-package schedule.cpu;/*
- * @author Kaoso
- * @since 2018.06.01
- */
+package schedule.cpu;
 
 import schedule.cpu.pcb.PriorityPcb;
 import schedule.cpu.priority.Priority;
@@ -13,9 +10,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
-/**
- * @author kaoso
- */
 public class Experiment {
 
     /**

@@ -3,9 +3,6 @@ package schedule.resource;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author kaoso
- */
 class SystemLevel extends T0status {
     private int[][] allocation;
     private int[][] need;

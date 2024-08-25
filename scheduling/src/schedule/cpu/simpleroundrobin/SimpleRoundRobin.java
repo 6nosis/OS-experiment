@@ -6,9 +6,6 @@ import schedule.cpu.pcb.Pcb;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author kaoso
- */
 public class SimpleRoundRobin extends AbstractMethod {
     /**
      * 数组列表容器：用来存储所有的PCB，先来的占小序号

@@ -5,9 +5,6 @@ import schedule.cpu.pcb.PriorityPcb;
 
 import java.util.*;
 
-/**
- * @author kaoso
- */
 public class Priority extends AbstractMethod {
     /**
      * 优先队列容器：用来存储所有带优先级的PCB，永远是降序排列的

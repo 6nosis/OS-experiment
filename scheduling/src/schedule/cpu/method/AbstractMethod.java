@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 
 /**
  * 展示当前容器中的进程信息，响应输入
- * @author kaoso
  */
 public abstract class AbstractMethod {
     /**

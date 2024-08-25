@@ -2,9 +2,6 @@ package schedule.cpu.pcb;
 
 import java.util.Scanner;
 
-/**
- * @author kaoso
- */
 public class Pcb {
     /**
      * 进程名

@@ -3,7 +3,6 @@ package schedule.cpu.pcb;
 import java.util.Scanner;
 
 /**
- * @author kaoso
  * 继承PCB属性，实现可比较接口
  */
 public class PriorityPcb extends Pcb implements Comparable<PriorityPcb> {

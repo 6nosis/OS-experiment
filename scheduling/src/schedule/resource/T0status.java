@@ -36,14 +36,8 @@ class T0status {
                 {0, 0, 0},
                 {0, 0, 0},
                 {0, 0, 0},};
-        // for (int i = 0; i < 5; i++){
-        //     for (int j = 0; j < 3; j++){
-        //         need[i][j] = max[i][j] - allocation[i][j];
-        //     }
-        // }
         for (int i = 0; i < 5; i++) {
             process.add(new Pcb("P" + String.valueOf(i), 'w', max[i], allocation[i]));
         }
     }
-
 }

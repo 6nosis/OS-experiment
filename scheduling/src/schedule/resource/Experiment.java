@@ -5,9 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
-/**
- * @author kaoso
- */
 public class Experiment {
     private SystemLevel sys = new SystemLevel("example");
     private int algorithm;

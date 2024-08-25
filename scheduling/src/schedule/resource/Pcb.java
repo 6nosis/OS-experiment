@@ -1,8 +1,5 @@
 package schedule.resource;
 
-/**
- * @author kaoso
- */
 public class Pcb {
     private String name;
     private char status;
